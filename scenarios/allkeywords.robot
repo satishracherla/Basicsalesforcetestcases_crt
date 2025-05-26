@@ -84,47 +84,50 @@ Example usage in a test case:
 
 
 *** Settings ***
-Library           QForce
-Suite Setup       Setup Browser
-Suite Teardown    Close All Browsers
+Library                QForce
+Library                SeleniumLibrary
+Suite Setup            Setup Browser
+Suite Teardown         Close All Browsers
 
 *** Test Cases ***
 Web Interface Operations Example
     [Documentation]    Demonstrates various web interface operations
-    [Tags]            example    web-ops
-    
+    [Tags]             example                web-ops
+
     # Navigation
-    GoTo              https://example.com
-    
+    GoTo               https://example.com
+
     # Form Operations
-    TypeText          Username    testuser
-    TypeSecret        Password    mysecretpass
-    ClickCheckbox     Remember me    on
-    DropDown          Country    United States
-    
+    TypeText           Username               testuser
+    TypeSecret         Password               mysecretpass
+    ClickCheckbox      Remember me            on
+    DropDown           Country                United States
+
     # Mouse Operations
-    HoverText         Help
-    ClickText         Submit
-    
+    HoverText          Help
+    ClickText          Submit
+
     # Verification
-    VerifyText        Welcome
-    VerifyElement     logout-button
-    
+    VerifyText         Welcome
+    VerifyElement      logout-button
+
     # Table Operations
-    UseTable          Users Table
-    VerifyTable       r1c1    Username
-    
+    UseTable           Users Table
+    VerifyTable        r1c1                   Username
+
     # Wait Operations
-    WaitText          Processing    timeout=5
-    
+    WaitText           Processing             timeout=5
+
     # Alert Handling
-    HandleAlert       Accept
+    HandleAlert        Accept
 
 *** Keywords ***
 Setup Browser
-    Open Browser      about:blank    chrome
-    SetConfig         DefaultTimeout    20s
-Important notes:
+    Open Browser       about:blank            chrome
+    SetConfig          DefaultTimeout         20s
+
+
+    # Important notes:
 
 All these keywords are part of QWeb library which is included in QForce
 
@@ -142,8 +145,6 @@ Set appropriate timeouts for your application
 Use proper verification steps
 Handle dynamic content appropriately
 Configuration options can be set using:
-
-robot
 SetConfig    DefaultTimeout    20s
 SetConfig    LineBreak        ${EMPTY}
 SetConfig    ClickToFocus     True
