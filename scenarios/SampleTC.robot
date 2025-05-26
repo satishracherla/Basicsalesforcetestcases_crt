@@ -1,14 +1,31 @@
 *** Settings ***
-Library SeleniumLibrary
-*** Variables ***
-${number} 100
+Library                   QForce
+Documentation            Test case that demonstrates browser navigation and variable handling
+Suite Setup              Setup Browser
+Suite Teardown           Close All Browsers
+
 *** Test Cases ***
-TC1
- Open Browser https://www.tutorialspoint.com/ chrome
- Maximize Browser Window
- Close Browser
-TC2
- ${a} Set Variable Hi
- Log ${a}
- ${b} Set Variable If ${number}>0 Yes No
- Log ${b}
+Navigate To Tutorialspoint
+    [Documentation]     Opens Tutorialspoint website and verifies its content
+    [Tags]             smoke    tutorial
+    GoTo               https://www.tutorialspoint.com/
+    VerifyText         Simply Easy Learning
+    VerifyText         Tutorials Library
+
+Variable Handling Example
+    [Documentation]     Demonstrates the handling of variables and conditional statements
+    [Tags]             example    variables
+    ${greeting}=       Set Variable    Hello World
+    VerifyText         Library        # Verifying something on the page while testing variables
+    ${result}=         Set Variable If    100 > 0    Positive    Negative
+    
+    # Using the variables (in real test cases, you'd use these for actual verification)
+    Log               ${greeting}     # Will log: Hello World
+    Log               ${result}      # Will log: Positive
+
+*** Keywords ***
+Setup Browser
+    [Documentation]    Sets up the browser with proper configuration
+    Open Browser       about:blank    chrome
+    SetConfig         LineBreak      ${EMPTY}        # Prevents automatic TAB after typing
+    SetConfig         DefaultTimeout    20s          # Increases default timeout for better reliability
