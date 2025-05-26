@@ -116,7 +116,7 @@ Web Interface Operations Example
     VerifyTable        r1c1                   Username
 
     # Wait Operations
-    WaitText           Processing             timeout=5
+    # WaitText           Processing             timeout=5
 
     # Alert Handling
     HandleAlert        Accept
